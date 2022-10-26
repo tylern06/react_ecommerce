@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { getRedirectResult } from 'firebase/auth';
 
+import SignUpForm from '../../components/sign-up/sign-up';
 // auth helps keep track of authentication state in app
 import {
   auth,
   signInWithGooglePopup,
   signInWithGoogleRedirect,
   createUserDocumentFromAuth,
+  createAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils';
 export default function SignIn() {
   useEffect(() => {
@@ -19,7 +21,7 @@ export default function SignIn() {
         console.log({ response, userDocRef });
       }
     };
-    getRedirectData();
+    // getRedirectData();
   }, []);
   const logGoogleUser = async () => {
     // open google popup to login with google account and get firebase access token
@@ -36,9 +38,10 @@ export default function SignIn() {
   return (
     <div>
       <div>SignIn Page</div>
-      <button onClick={logGoogleUserRedirect}>
+      <button onClick={logGoogleUser}>
         Sign in with google pop up
       </button>
+      <SignUpForm />
     </div>
   );
 }
