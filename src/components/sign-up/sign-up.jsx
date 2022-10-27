@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { createAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
+import FormInput from '../form-input/form-input.component';
+import Button from '../button/button.component';
+
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from '../../utils/firebase/firebase.utils';
+import './sign-up.styles.scss';
 
 const defaultFormFields = {
   displayName: '',
@@ -26,51 +33,61 @@ function SignUpForm() {
         password
       );
 
+      await createUserDocumentFromAuth(user, { displayName });
       console.log({ user });
-    } catch (err) {}
+      setFormFields({ ...defaultFormFields });
+    } catch (err) {
+      console.log({ err });
+      if (err.code === 'auth/email-already-in-use') {
+        alert('Cannot create user, email in use');
+      }
+    }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
+
   return (
-    <div>
-      <h1>Sign up with your email and password</h1>
+    <div className="sign-up-container">
+      <h2>Don't have an account</h2>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label={'Display Name'}
           type="text"
           required
           onChange={handleChange}
           name="displayName"
           value={displayName}
         />
-        <label>Email</label>
-        <input
+        <FormInput
+          label={'Email'}
           type="email"
           required
           onChange={handleChange}
           name="email"
           value={email}
         />
-        <label>Password</label>
-        <input
+
+        <FormInput
+          label={'Password'}
           type="password"
           required
           onChange={handleChange}
           name="password"
           value={password}
         />
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label={'Confirm Password'}
           type="password"
           required
           onChange={handleChange}
           name="confirmPassword"
           value={confirmPassword}
         />
-        <button>Sign Up</button>
+        <Button buttonType={'inverted'}>Sign Up</Button>
       </form>
     </div>
   );

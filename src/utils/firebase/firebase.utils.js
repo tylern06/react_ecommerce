@@ -58,7 +58,10 @@ export const createAuthUserWithEmailAndPassword = async (
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalUserInfo = {}
+) => {
   if (!userAuth) return;
 
   // create document in users collection with user id
@@ -76,6 +79,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalUserInfo,
       });
     } catch (err) {
       console.log('error creating the user', err);

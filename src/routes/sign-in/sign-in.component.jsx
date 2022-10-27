@@ -37,10 +37,10 @@ export default function SignIn() {
   };
   return (
     <div>
-      <div>SignIn Page</div>
+      {/* <div>SignIn Page</div>
       <button onClick={logGoogleUser}>
         Sign in with google pop up
-      </button>
+      </button> */}
       <SignUpForm />
     </div>
   );
