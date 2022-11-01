@@ -5,26 +5,26 @@ import Button from '../button/button.component';
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  signInWithGooglePopup,
 } from '../../utils/firebase/firebase.utils';
-import './sign-up.styles.scss';
+import './sign-in-form.styles.scss';
 
 const defaultFormFields = {
-  displayName: '',
   email: '',
   password: '',
-  confirmPassword: '',
 };
-function SignUpForm() {
+
+function SignInForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } =
-    formFields;
+  const { email, password } = formFields;
+
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    const userDocRef = await createUserDocumentFromAuth(user);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (formFields.password !== formFields.confirmPassword) {
-      alert('passwords do no match');
-      return;
-    }
 
     try {
       // call firebase create user with email/password
@@ -33,7 +33,6 @@ function SignUpForm() {
         password
       );
 
-      await createUserDocumentFromAuth(user, { displayName });
       console.log({ user });
       setFormFields({ ...defaultFormFields });
     } catch (err) {
@@ -51,17 +50,9 @@ function SignUpForm() {
 
   return (
     <div className="sign-up-container">
-      <h2>Don't have an account</h2>
-      <span>Sign up with your email and password</span>
+      <h2>Already have an account?</h2>
+      <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <FormInput
-          label={'Display Name'}
-          type="text"
-          required
-          onChange={handleChange}
-          name="displayName"
-          value={displayName}
-        />
         <FormInput
           label={'Email'}
           type="email"
@@ -79,18 +70,15 @@ function SignUpForm() {
           name="password"
           value={password}
         />
-        <FormInput
-          label={'Confirm Password'}
-          type="password"
-          required
-          onChange={handleChange}
-          name="confirmPassword"
-          value={confirmPassword}
-        />
-        <Button buttonType={'inverted'}>Sign Up</Button>
+        <div className="buttons-container">
+          <Button buttonType={'inverted'}>Sign In</Button>
+          <Button buttonType={'google'} onClick={signInWithGoogle}>
+            Google Sign In
+          </Button>
+        </div>
       </form>
     </div>
   );
 }
 
-export default SignUpForm;
+export default SignInForm;

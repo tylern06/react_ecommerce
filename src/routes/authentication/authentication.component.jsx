@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { getRedirectResult } from 'firebase/auth';
 
-import SignUpForm from '../../components/sign-up/sign-up';
+import SignUpForm from '../../components/sign-up-form/sign-up-form.component';
+import SignInForm from '../../components/sign-in-form/sign-in-form.component';
 // auth helps keep track of authentication state in app
 import {
   auth,
@@ -21,6 +22,7 @@ export default function SignIn() {
         console.log({ response, userDocRef });
       }
     };
+    // redirect back to homepage page after authenication
     // getRedirectData();
   }, []);
   const logGoogleUser = async () => {
@@ -42,6 +44,7 @@ export default function SignIn() {
         Sign in with google pop up
       </button> */}
       <SignUpForm />
+      <SignInForm />
     </div>
   );
 }
