@@ -3,6 +3,9 @@ import { getRedirectResult } from 'firebase/auth';
 
 import SignUpForm from '../../components/sign-up-form/sign-up-form.component';
 import SignInForm from '../../components/sign-in-form/sign-in-form.component';
+
+import './authentication.styles.scss';
+
 // auth helps keep track of authentication state in app
 import {
   auth,
@@ -38,7 +41,7 @@ export default function SignIn() {
     // console.log({ user });
   };
   return (
-    <div>
+    <div className="authentication-container">
       {/* <div>SignIn Page</div>
       <button onClick={logGoogleUser}>
         Sign in with google pop up
