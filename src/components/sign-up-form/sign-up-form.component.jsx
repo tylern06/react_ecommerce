@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
-
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -33,6 +32,7 @@ function SignUpForm() {
         password
       );
 
+      // setCurrentUser(user);
       await createUserDocumentFromAuth(user, { displayName });
       console.log({ user });
       setFormFields({ ...defaultFormFields });
