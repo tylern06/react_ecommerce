@@ -3,9 +3,8 @@ import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
 import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
   signInWithGooglePopup,
+  signInUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils';
 import './sign-in-form.styles.scss';
 
@@ -20,21 +19,18 @@ function SignInForm() {
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
-    console.log('sign in with google');
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('handle sumbit');
     try {
-      // call firebase create user with email/password
-      const { user } = await createAuthUserWithEmailAndPassword(
+      // call firebase sign in user with email/password
+      const { user } = await signInUserWithEmailAndPassword(
         email,
         password
       );
 
-      console.log({ user });
       setFormFields({ ...defaultFormFields });
     } catch (err) {
       console.log({ err });
@@ -72,7 +68,7 @@ function SignInForm() {
           value={password}
         />
         <div className="buttons-container">
-          <Button buttonType={'inverted'}>Sign In</Button>
+          <Button>Sign In</Button>
           <Button buttonType={'google'} onClick={signInWithGoogle}>
             Google Sign In
           </Button>
