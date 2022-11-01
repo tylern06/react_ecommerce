@@ -32,10 +32,19 @@ function SignInForm() {
       );
 
       setFormFields({ ...defaultFormFields });
-    } catch (err) {
-      console.log({ err });
-      if (err.code === 'auth/email-already-in-use') {
-        alert('Cannot create user, email in use');
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/wrong-password': {
+          alert('Incorrect password for email');
+          break;
+        }
+        case 'auth/user-not-found': {
+          alert('No user associated with this email');
+
+          break;
+        }
+        default:
+          console.log({ error });
       }
     }
   };
@@ -53,7 +62,7 @@ function SignInForm() {
         <FormInput
           label={'Email'}
           type="email"
-          // required
+          required
           onChange={handleChange}
           name="email"
           value={email}
@@ -62,14 +71,18 @@ function SignInForm() {
         <FormInput
           label={'Password'}
           type="password"
-          // required
+          required
           onChange={handleChange}
           name="password"
           value={password}
         />
         <div className="buttons-container">
           <Button>Sign In</Button>
-          <Button buttonType={'google'} onClick={signInWithGoogle}>
+          <Button
+            type="button"
+            buttonType={'google'}
+            onClick={signInWithGoogle}
+          >
             Google Sign In
           </Button>
         </div>
