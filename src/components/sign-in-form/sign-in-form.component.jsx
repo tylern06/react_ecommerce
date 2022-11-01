@@ -21,11 +21,12 @@ function SignInForm() {
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     const userDocRef = await createUserDocumentFromAuth(user);
+    console.log('sign in with google');
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log('handle sumbit');
     try {
       // call firebase create user with email/password
       const { user } = await createAuthUserWithEmailAndPassword(
@@ -49,14 +50,14 @@ function SignInForm() {
   };
 
   return (
-    <div className="sign-up-container">
+    <div className="sign-in-container">
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label={'Email'}
           type="email"
-          required
+          // required
           onChange={handleChange}
           name="email"
           value={email}
@@ -65,7 +66,7 @@ function SignInForm() {
         <FormInput
           label={'Password'}
           type="password"
-          required
+          // required
           onChange={handleChange}
           name="password"
           value={password}
