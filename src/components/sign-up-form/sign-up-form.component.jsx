@@ -32,7 +32,6 @@ function SignUpForm() {
         password
       );
 
-      // setCurrentUser(user);
       await createUserDocumentFromAuth(user, { displayName });
       console.log({ user });
       setFormFields({ ...defaultFormFields });

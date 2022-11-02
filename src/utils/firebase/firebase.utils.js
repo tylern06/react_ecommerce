@@ -85,6 +85,7 @@ export const signOutUser = async (user) => {
 
 export const db = getFirestore();
 
+// create user doc in db if it doesn't exist
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalUserInfo = {}
