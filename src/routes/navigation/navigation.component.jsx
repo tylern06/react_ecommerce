@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
+import CardIcon from '../../components/cart-icon/cart-icon.component';
+
 import { UserContext } from '../../contexts/user.context';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
@@ -34,6 +36,7 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CardIcon />
         </div>
       </div>
       {/* Outlet outputs the nested route component relative to the current component*/}
