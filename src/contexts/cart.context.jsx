@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-export const CardContext = createContext({
+export const CartContext = createContext({
   isCartOpen: false,
   setIsCartOpen: () => {},
 });
@@ -10,8 +10,8 @@ export const CartProvider = ({ children }) => {
   const value = { isCartOpen, setIsCartOpen };
 
   return (
-    <CardContext.Provider value={value}>
+    <CartContext.Provider value={value}>
       {children}
-    </CardContext.Provider>
+    </CartContext.Provider>
   );
 };
