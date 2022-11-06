@@ -15,7 +15,6 @@ function CardIcon() {
   const itemCount = useMemo(
     () =>
       cartItems.reduce((total, currentItem) => {
-        console.log('compute');
         return total + currentItem.quantity;
       }, 0),
     [cartItems]
