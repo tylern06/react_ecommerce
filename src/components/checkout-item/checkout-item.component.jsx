@@ -29,18 +29,21 @@ function CheckoutItem({ cartItem }) {
       </div>
       <span className="name">{name}</span>
       <span className="quantity">
-        <div className="arrow" onClick={decrement(cartItem)}>
+        <button className="arrow" onClick={decrement(cartItem)}>
           &#10094;
-        </div>
+        </button>
         <span className="value">{quantity}</span>
-        <div className="arrow" onClick={increment(cartItem)}>
+        <button className="arrow" onClick={increment(cartItem)}>
           &#10095;
-        </div>
+        </button>
       </span>
       <span className="price">{price}</span>
-      <span className="remove-button" onClick={removeItem(cartItem)}>
+      <button
+        className="remove-button"
+        onClick={removeItem(cartItem)}
+      >
         &#10005;
-      </span>
+      </button>
     </div>
   );
 }
