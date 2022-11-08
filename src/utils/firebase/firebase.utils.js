@@ -15,7 +15,11 @@ import {
   getFirestore,
   doc,
   getDoc,
+  getDocs,
   setDoc,
+  collection,
+  writeBatch,
+  query,
 } from 'firebase/firestore';
 // import { getAnalytics } from 'firebase/analytics';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -85,6 +89,38 @@ export const signOutUser = async (user) => {
 
 export const db = getFirestore();
 
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  // create collection from key
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+  objectsToAdd.forEach((object) => {
+    // create doc based on the title of the object
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    console.log('batch set object', docRef, object);
+    batch.set(docRef, object);
+  });
+  await batch.commit();
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+  // get docs from categories collection
+  const querySnapshot = await getDocs(q);
+  const categoriesMap = querySnapshot.docs.reduce(
+    (acc, currentDoc) => {
+      const { title, items } = currentDoc.data();
+      acc[title.toLowerCase()] = items;
+      return acc;
+    },
+    {}
+  );
+
+  return categoriesMap;
+};
 // create user doc in db if it doesn't exist
 export const createUserDocumentFromAuth = async (
   userAuth,

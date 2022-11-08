@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import { UserProvider } from './contexts/user.context';
-import { ProductProvider } from './contexts/products-context';
+import { CategoriesProvider } from './contexts/categories.context';
 import { CartProvider } from './contexts/cart.context';
 import { store } from './store/store';
 import './index.scss';
@@ -16,11 +16,11 @@ rootElement.render(
     <Provider store={store}>
       <BrowserRouter>
         <UserProvider>
-          <ProductProvider>
+          <CategoriesProvider>
             <CartProvider>
               <App />
             </CartProvider>
-          </ProductProvider>
+          </CategoriesProvider>
         </UserProvider>
       </BrowserRouter>
     </Provider>
