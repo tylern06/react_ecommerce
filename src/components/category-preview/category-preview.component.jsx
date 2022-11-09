@@ -3,6 +3,7 @@ import ProductCard from '../product-card/product-card.component';
 import './category-preview.styles.scss';
 
 function CategoryPreview({ title, products }) {
+  console.log({ products });
   return (
     <div className="category-preview-container">
       <h2>
@@ -11,9 +12,12 @@ function CategoryPreview({ title, products }) {
         </Link>
       </h2>
       <div className="preview">
-        {products.slice(0, 4).map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {products &&
+          products
+            .slice(0, 4)
+            .map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
       </div>
     </div>
   );
