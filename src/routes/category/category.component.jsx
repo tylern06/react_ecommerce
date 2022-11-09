@@ -10,14 +10,14 @@ import './category.styles.scss';
 function Category() {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
-  console.log({ category, categoriesMap });
   const [products, setProducts] = useState([]);
-  console.log({ products });
+
   useEffect(() => {
     if (categoriesMap) {
       setProducts(categoriesMap[category]);
     }
   }, [category, categoriesMap]);
+
   return (
     <div className="category-container">
       {products &&

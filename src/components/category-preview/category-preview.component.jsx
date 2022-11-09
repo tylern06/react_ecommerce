@@ -3,12 +3,13 @@ import ProductCard from '../product-card/product-card.component';
 import './category-preview.styles.scss';
 
 function CategoryPreview({ title, products }) {
-  console.log({ products });
   return (
     <div className="category-preview-container">
       <h2>
         <Link to={title}>
-          <span>{title && title.toUpperCase()}</span>
+          <span className="title">
+            {title && title.toUpperCase()}
+          </span>
         </Link>
       </h2>
       <div className="preview">

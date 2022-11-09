@@ -30,7 +30,7 @@ import {
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API,
   authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: '870077035158',
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
@@ -110,16 +110,7 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
   // get docs from categories collection
   const querySnapshot = await getDocs(q);
-  const categoriesMap = querySnapshot.docs.reduce(
-    (acc, currentDoc) => {
-      const { title, items } = currentDoc.data();
-      acc[title.toLowerCase()] = items;
-      return acc;
-    },
-    {}
-  );
-
-  return categoriesMap;
+  return querySnapshot.docs.map((doc) => doc.data());
 };
 // create user doc in db if it doesn't exist
 export const createUserDocumentFromAuth = async (
