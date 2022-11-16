@@ -7,10 +7,10 @@ import {
   clearItemFromCart,
 } from '../../store/cart/cart.action';
 import './checkout-item.styles.scss';
-import { selectCartReducer } from '../../store/cart/cart.selector';
+import { selectCartItems } from '../../store/cart/cart.selector';
 function CheckoutItem({ cartItem }) {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector(selectCartReducer);
+  const cartItems = useSelector(selectCartItems);
   const { name, imageUrl, price, quantity } = cartItem;
   // const {
   //   cartItems,
