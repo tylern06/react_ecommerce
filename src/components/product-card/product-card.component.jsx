@@ -1,14 +1,19 @@
 import React, { useContext, useCallback } from 'react';
-import { CartContext } from '../../contexts/cart.context';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartReducer } from '../../store/cart/cart.selector';
+import { addItemToCart } from '../../store/cart/cart.action';
+
 import Button from '../button/button.component';
 import './product-card.styles.scss';
 
 function ProductCard({ product }) {
-  const { addItemToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector(selectCartReducer);
+
   const { name, price, imageUrl } = product;
   const addProductToCart = useCallback(
-    () => addItemToCart(product),
-    [product, addItemToCart]
+    () => dispatch(addItemToCart(cartItems, product)),
+    [cartItems, product, dispatch]
   );
 
   return (

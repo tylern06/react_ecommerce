@@ -1,14 +1,20 @@
 import React, { useContext, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsCartOpen } from '../../store/cart/cart.action';
+import { selectCartReducer } from '../../store/cart/cart.selector';
+
 import './cart-icon.styles.scss';
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
-import { CartContext } from '../../contexts/cart.context';
+// import { CartContext } from '../../contexts/cart.context';
 
 function CardIcon() {
-  const { cartItems, isCartOpen, setIsCartOpen } =
-    useContext(CartContext);
+  const dispatch = useDispatch();
+  const { cartItems, isCartOpen } = useSelector(selectCartReducer);
 
   const toggleIsCartOpen = () => {
-    setIsCartOpen(!isCartOpen);
+    // setIsCartOpen(!isCartOpen);
+    console.log('toggle', isCartOpen);
+    dispatch(setIsCartOpen(!isCartOpen));
   };
 
   // memoize quantity count to prevent recompute when cart dropdown is open
