@@ -17,7 +17,6 @@ function CardIcon() {
 
   const toggleIsCartOpen = () => {
     // setIsCartOpen(!isCartOpen);
-    console.log('toggle', isCartOpen);
     dispatch(setIsCartOpen(!isCartOpen));
   };
 
