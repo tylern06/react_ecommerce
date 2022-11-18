@@ -22,3 +22,11 @@ export const selectCategoriesMap = createSelector(
     }, {});
   }
 );
+
+export const selectCategoriesIsLoading = createSelector(
+  [selectCategoriesReducer],
+  (categoriesSlice) => {
+    // console.log('selector for Slice map');
+    return categoriesSlice.isLoading;
+  }
+);
