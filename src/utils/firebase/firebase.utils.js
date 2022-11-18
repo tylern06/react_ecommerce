@@ -105,8 +105,8 @@ export const addCollectionAndDocuments = async (
   await batch.commit();
 };
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, 'categories');
+export const getCategoriesAndDocuments = async (label) => {
+  const collectionRef = collection(db, label);
   const q = query(collectionRef);
   // get docs from categories collection
   const querySnapshot = await getDocs(q);

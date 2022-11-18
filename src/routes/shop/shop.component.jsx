@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { fetchCategoriesAsync } from '../../store/categories/category.action';
+import {
+  fetchCategoriesAsync,
+  fetchCategoriesStart,
+} from '../../store/categories/category.action';
 
 import Category from '../category/category.component';
 import CategoriesPreview from '../categories-preview/categories-preview.component';
@@ -11,7 +14,9 @@ export default function Shop() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCategoriesAsync());
+    // dispatch(fetchCategoriesAsync());
+    // replace thunk with saga by dispatching fetchCategoryStart (initial action for fetching data)
+    dispatch(fetchCategoriesStart());
   }, []);
   return (
     <Routes>

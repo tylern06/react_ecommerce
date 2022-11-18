@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <>
       {/* Outlet outputs the nested route component relative to the current component*/}
-      <Outlet />
+      {/* <Outlet /> */}
       <Directory categories={categories} />
     </>
   );

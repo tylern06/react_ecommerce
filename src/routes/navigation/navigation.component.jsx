@@ -40,6 +40,7 @@ const Navigation = () => {
         </div>
         {isCartOpen && <CartDropdown />}
       </div>
+      {/* Outlet outputs the nested route component relative to the current component*/}
       <Outlet />
     </Fragment>
   );
